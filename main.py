@@ -1,3 +1,7 @@
+def character_counter(words: list):
+    for word in words:
+        individual_characters = list(word.lower())
+
 def word_counter(sentence: str) -> list:
     words = sentence.split()
     print(f"Number of words:{len(words)}")
