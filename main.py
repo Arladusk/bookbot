@@ -1,4 +1,7 @@
-def character_counter(words: list):
+def sort_and_print(characters: dict):
+    sorted_characters = dict(sorted(characters.items(), key=lambda item: item[1], reverse=True))
+
+def character_counter(words: list) -> dict:
     total_characters = {}
     for word in words:
         individual_characters = list(word.lower())
@@ -18,5 +21,7 @@ def main():
     with open("books/frankenstein.txt") as f:
         file_contents = f.read()
         words = word_counter(file_contents)
-        character_counter(words)
+        characters = character_counter(words)
+        sort_and_print(characters)
+
 main()
