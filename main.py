@@ -1,6 +1,13 @@
 def character_counter(words: list):
+    total_characters = {}
     for word in words:
         individual_characters = list(word.lower())
+        for individual_character in individual_characters:
+            if individual_character in total_characters:
+                total_characters[individual_character] += 1
+            else:
+                total_characters[individual_character] = 1
+    return total_characters
 
 def word_counter(sentence: str) -> list:
     words = sentence.split()
