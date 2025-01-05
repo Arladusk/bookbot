@@ -1,7 +1,8 @@
-def sort_and_print(characters: dict):
+def sort_and_print(characters: dict, words: list):
+    print(f"List of all characters in the {len(words)} words in Frankenstein sorted by occurance:")
     sorted_characters = dict(sorted(characters.items(), key=lambda item: item[1], reverse=True))
     for sorted_character in sorted_characters:
-        print(f"{sorted_character} occured {sorted_characters[sorted_character]} times.")
+        print(f"{sorted_character} found {sorted_characters[sorted_character]} times.")
 
 def character_counter(words: list) -> dict:
     total_characters = {}
@@ -16,7 +17,6 @@ def character_counter(words: list) -> dict:
 
 def word_counter(sentence: str) -> list:
     words = sentence.split()
-    print(f"Number of words:{len(words)}")
     return words
 
 def main():
@@ -24,6 +24,6 @@ def main():
         file_contents = f.read()
         words = word_counter(file_contents)
         characters = character_counter(words)
-        sort_and_print(characters)
+        sort_and_print(characters, words)
 
 main()
