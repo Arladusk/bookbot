@@ -1,5 +1,7 @@
 def sort_and_print(characters: dict):
     sorted_characters = dict(sorted(characters.items(), key=lambda item: item[1], reverse=True))
+    for sorted_character in sorted_characters:
+        print(f"{sorted_character} occured {sorted_characters[sorted_character]} times.")
 
 def character_counter(words: list) -> dict:
     total_characters = {}
