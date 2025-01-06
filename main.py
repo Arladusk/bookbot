@@ -14,7 +14,7 @@ def lower_case(words: list) -> list:
         individual_characters.extend(list(word.lower()))
     return individual_characters
 
-    # Takes a list of characters, and counts them based on user input to include or exclude non-alphabetical characters. 
+# Takes a list of characters, and counts them based on user input to include or exclude non-alphabetical characters. 
 # Then returns a dictionary of the result. 
 def character_counter(characters: list, user_choice: str) -> dict:
     total_characters = {}
