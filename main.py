@@ -30,13 +30,17 @@ def word_counter(sentence: str) -> list:
     words = sentence.split()
     return words
 
-# Reads the book, and calls the functions to process the text. 
+# Takes user input on wether or not to keep all characters in the list.
+def user_choice():
+    return input("Do you want to include all characters in the resulting list, such as punctuation and numbers? (y/n):").lower()
+
+# Takes user input, Reads the book, and calls the functions to process the text. 
 def main():
-    alphabet_only = input("Do you want to include all characters in the resuling list, such as punctuation and numbers? (y/n):").lower()
+    include_all_chars = user_choice()
     with open("books/frankenstein.txt") as f:
         file_contents = f.read()
         words = word_counter(file_contents)
-        characters = character_counter(words, alphabet_only)
+        characters = character_counter(words, include_all_chars)
         sort_and_print(characters, words)
 
 main()
