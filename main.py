@@ -1,3 +1,35 @@
+# Takes user input on wether or not to keep all characters in the list.
+def user_choice():
+    return input("Do you want to include all characters in the resulting list, such as punctuation and numbers? (y/n):").lower()
+
+# Takes a string and returns it as a list of words. 
+def word_counter(sentence: str) -> list:
+    words = sentence.split()
+    return words
+
+# Turns list of words into list of individual lowercase characters.
+def lower_case(words: list) -> list:
+    individual_characters = []
+    for word in words:
+        individual_characters.extend(list(word.lower()))
+    return individual_characters
+
+    # Takes a list of characters, and counts them based on user input to include or exclude non-alphabetical characters. 
+# Then returns a dictionary of the result. 
+def character_counter(characters: list, user_choice: str) -> dict:
+    total_characters = {}
+    for character in characters:
+        if user_choice == "y":
+            if character in total_characters:
+                total_characters[character] += 1 
+            else:
+                total_characters[character] = 1
+        else:
+            if character in total_characters and character.isalpha():
+                total_characters[character] += 1 
+            elif character.isalpha():
+                total_characters[character] = 1
+    return total_characters
 
 # Makes a sorted list by key value in reverse, then prints relevant result of the program, with some text for clarity.
 def sort_and_print(characters: dict, words: list):
@@ -6,41 +38,14 @@ def sort_and_print(characters: dict, words: list):
     for sorted_character in sorted_characters:
         print(f"{sorted_character} found {sorted_characters[sorted_character]} times.")
 
-# Takes a list of words, converts all letters into lowercase, then depending on user input it includes or excludes non-alphabetical characters. 
-# Then returns a dictionary of individual characters. 
-def character_counter(words: list, user_choice: str) -> dict:
-    total_characters = {}
-    for word in words:
-        individual_characters = list(word.lower())
-        for individual_character in individual_characters:
-            if user_choice == "y":
-                if individual_character in total_characters:
-                    total_characters[individual_character] += 1 
-                else:
-                    total_characters[individual_character] = 1
-            else:
-                if individual_character in total_characters and individual_character.isalpha():
-                    total_characters[individual_character] += 1 
-                elif individual_character.isalpha():
-                    total_characters[individual_character] = 1
-    return total_characters
-
-# Takes a string and returns it as a list of words. 
-def word_counter(sentence: str) -> list:
-    words = sentence.split()
-    return words
-
-# Takes user input on wether or not to keep all characters in the list.
-def user_choice():
-    return input("Do you want to include all characters in the resulting list, such as punctuation and numbers? (y/n):").lower()
-
-# Takes user input, Reads the book, and calls the functions to process the text. 
+# Reads the book, and calls the functions to process and print the results of the book.. 
 def main():
     include_all_chars = user_choice()
     with open("books/frankenstein.txt") as f:
         file_contents = f.read()
         words = word_counter(file_contents)
-        characters = character_counter(words, include_all_chars)
-        sort_and_print(characters, words)
+        characters = lower_case(words)
+        counted_characters = character_counter(characters, include_all_chars)
+        sort_and_print(counted_characters, words)
 
 main()
