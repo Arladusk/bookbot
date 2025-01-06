@@ -1,5 +1,5 @@
 # Takes user input on wether or not to keep all characters in the list.
-def user_choice():
+def user_choice() -> str:
     return input("Do you want to include all characters in the resulting list, such as punctuation and numbers? (y/n):").lower()
 
 # Takes a string and returns it as a list of words. 
