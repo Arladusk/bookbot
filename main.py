@@ -14,22 +14,20 @@ def lower_case(words: list) -> list:
         individual_characters.extend(list(word.lower()))
     return individual_characters
 
-# Takes a list of characters, and counts them based on user input to include or exclude non-alphabetical characters. 
-# Then returns a dictionary of the result. 
-def character_counter(characters: list, user_choice: str) -> dict:
-    total_characters = {}
-    for character in characters:
-        if user_choice == "y":
-            if character in total_characters:
-                total_characters[character] += 1 
-            else:
-                total_characters[character] = 1
-        else:
-            if character in total_characters and character.isalpha():
-                total_characters[character] += 1 
-            elif character.isalpha():
-                total_characters[character] = 1
+# Filters based on user input and calls add_character
+def filter_character(raw_characters: list, user_choice: str) -> dict:
+    total_characters = {} 
+    for raw_character in raw_characters:
+        if user_choice == "y" or (user_choice == "n" and raw_character.isalpha()):
+            increment_character_count(total_characters, raw_character)
     return total_characters
+
+    # Adds new characters to dict, increments if duplicate.  
+def increment_character_count(total_characters: dict, character: str) -> dict:
+    if character in total_characters: 
+        total_characters[character] += 1
+    else:
+        total_characters[character] = 1
 
 # Makes a sorted list by key value in reverse, then prints relevant result of the program, with some text for clarity.
 def sort_and_print(characters: dict, words: list):
@@ -41,11 +39,11 @@ def sort_and_print(characters: dict, words: list):
 # Reads the book, and calls the functions to process and print the results of the book.. 
 def main():
     include_all_chars = user_choice()
-    with open("books/frankenstein.txt") as f:
+    with open("books/testbook.txt") as f:
         file_contents = f.read()
         words = word_counter(file_contents)
         characters = lower_case(words)
-        counted_characters = character_counter(characters, include_all_chars)
+        counted_characters = filter_character(characters, include_all_chars)
         sort_and_print(counted_characters, words)
 
 main()
